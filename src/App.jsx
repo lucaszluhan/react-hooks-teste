@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import React from 'react';
 
 const themeApp = {
@@ -35,6 +35,11 @@ function H1() {
 function App() {
    const [counter, setCounter] = useState(0);
    const [name, setName] = useState('Hello');
+   const ref = useRef();
+
+   const all = () => {
+      alert(ref.current.innerText);
+   };
 
    useEffect(() => {
       setCounter(counter + 1);
@@ -42,8 +47,17 @@ function App() {
 
    return (
       <div className="App">
-         <h1 onClick={() => setCounter(counter + 1)}>{counter}</h1>
+         <h1
+            onClick={() => {
+               setCounter(counter + 1);
+               all();
+            }}
+            ref={ref}
+         >
+            {counter}
+         </h1>
          <h1 onClick={() => setName(`${name} World`)}>{name}</h1>
+
          <H1></H1>
       </div>
    );
